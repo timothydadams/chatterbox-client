@@ -1,3 +1,8 @@
+
+/*
+  Called by app.js
+
+*/
 var RoomsView = {
 
   $button: $('#rooms button'),

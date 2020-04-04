@@ -1,3 +1,12 @@
+/* This seems like it's performing the actions of the Model.
+    It is basically instantiating the App.
+   Calls
+      -formView.js
+      -roomsView.js
+      -messagesView.js -
+      -parse.js  - to get data from the database
+
+*/
 var App = {
 
   $spinner: $('.spinner img'),
@@ -18,10 +27,15 @@ var App = {
   },
 
   fetch: function(callback = ()=>{}) {
-    Parse.readAll((data) => {
+    Parse.readAll((data) => { //where we need to sanitize
+
       // examine the response from the server request:
       console.log(data);
-
+      // for (var i = 0; i <data.results.length; i++) {
+      MessagesView.render(data['results']);
+      //     data.results[i].text = JSON.stringify(data.results[i].text);
+      // }
+      //return data;
       callback();
     });
   },
