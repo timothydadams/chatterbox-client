@@ -8,11 +8,15 @@ var MessagesView = {
     // MessagesView.$chats.append(MessagesView.render(App.fetch.results));
   },
 
-  render: function(messages) {
+  renderMessage: function(messages) {
     // Generate the html wrapper for all the messages
-    // messages.forEach(message => {
-    //   MessagesView.$chats.append(MessageView.render(message));
-    // });
-  }
+    messages.forEach(message => {
+      if (message.username && message.text) {
+        MessagesView.$chats.append(MessageView.render(message));
+      }
+    });
+  },
+
+
 
 };

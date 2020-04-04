@@ -2,11 +2,11 @@
 //should be MODEL for all messages
 
 var Messages = {
-  //username
-  //objectID
-  //text
-  //roomName
-  //timeStamp
-  //updatedAt
+  // username: 'sam'
+  // objectID:,
+  // text:,
+  // roomName:,
+  // timeStamp:,
+  // updatedAt:
 
 };

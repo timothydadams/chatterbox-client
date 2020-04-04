@@ -14,7 +14,14 @@ var FormView = {
     // Stop the browser from submitting the form
     event.preventDefault();
     //build the POST (Parse.create ?)
+    var newMsg = {
+      username: App.username, //from the browser window?
+      text: $('#message').val(), //jquery for selecting text in input field
+      roomname: RoomsView.$select.val()
+    };
     //POST message to server
+    Parse.create(newMsg, Parse.create.success);
+
     console.log('click!');
   },
 
