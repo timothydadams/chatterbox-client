@@ -32,7 +32,7 @@ var App = {
       // examine the response from the server request:
       console.log(data);
       // for (var i = 0; i <data.results.length; i++) {
-      MessagesView.renderMessage(data['results']);
+      MessagesView.render(data['results']);
       RoomsView.buildSelect(data['results']);
       //     data.results[i].text = JSON.stringify(data.results[i].text);
       // }

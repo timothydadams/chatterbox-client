@@ -22,6 +22,8 @@ var FormView = {
     //POST message to server
     Parse.create(newMsg, Parse.create.success);
 
+    MessagesView.renderMessage(newMsg);
+
     console.log('click!');
   },
 

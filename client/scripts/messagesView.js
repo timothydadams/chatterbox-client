@@ -8,7 +8,7 @@ var MessagesView = {
     // MessagesView.$chats.append(MessagesView.render(App.fetch.results));
   },
 
-  renderMessage: function(messages) {
+  render: function(messages) {
     // Generate the html wrapper for all the messages
     messages.forEach(message => {
       if (message.username && message.text) {
@@ -16,6 +16,10 @@ var MessagesView = {
       }
     });
   },
+
+  renderMessage: function(message) { // append new message to the view
+    MessagesView.$chats.prepend(MessageView.render(message));
+  }
 
 
 
