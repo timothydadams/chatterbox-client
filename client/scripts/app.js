@@ -24,7 +24,7 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
-    setInterval(App.fetch, 3000);
+    // setInterval(App.fetch, 3000);
 
   },
 

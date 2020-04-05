@@ -6,6 +6,7 @@ var MessagesView = {
     // Build container for messages <div id="chats">???
     // get the messages
     // MessagesView.$chats.append(MessagesView.render(App.fetch.results));
+    MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
   },
 
   render: function() {
@@ -19,6 +20,14 @@ var MessagesView = {
 
   renderMessage: function(message) { // append new message to the view
     MessagesView.$chats.prepend(MessageView.render(message));
+  },
+
+  handleClick: function(event) {
+    var username = $(event.currentTarget).data('username');
+
+    if (username === undefined) { return; }
+
+    Friends.toggleStatus(username, MessagesView.render);
   }
 
 };
