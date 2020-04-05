@@ -13,18 +13,17 @@ var FormView = {
   handleSubmit: function(event) { // Submits the form
     // Stop the browser from submitting the form
     event.preventDefault();
-    //build the POST (Parse.create ?)
-    var newMsg = {
+    //build the message and POST to server via Parse
+    var message = {
       username: App.username, //from the browser window?
-      text: $('#message').val(), //jquery for selecting text in input field
+      text: FormView.$form.find('#message').val(), //Rooms.selected
       roomname: RoomsView.$select.val()
     };
-    //POST message to server
-    Parse.create(newMsg, Parse.create.success);
-
-    MessagesView.renderMessage(newMsg);
-
-    console.log('click!');
+    //POST message to server and store return info on the message object for missing properties
+    Parse.create(message, (data) => {
+      _.extend(message, data);
+      Messages.add(message, MessagesView.renderMessage);
+    });
   },
 
   setStatus: function(active) {

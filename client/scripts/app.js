@@ -24,19 +24,23 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+    setInterval(App.fetch, 3000);
+
   },
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => { //where we need to sanitize
-
       // examine the response from the server request:
       console.log(data);
-      // for (var i = 0; i <data.results.length; i++) {
-      MessagesView.render(data['results']);
-      RoomsView.buildSelect(data['results']);
-      //     data.results[i].text = JSON.stringify(data.results[i].text);
-      // }
-      //return data;
+      //assign Messages to data.results (abstracting results in Messages object)
+      //Messages.update(data.results, MessagesView.render)
+      Rooms.update(data.results, RoomsView.render);
+      Messages.update(data.results, MessagesView.render);
+      // MessagesView.render();
+      // MessagesView.render(data['results']);
+
+      //RoomsView.buildSelect(data['results']);
+
       callback();
     });
   },
