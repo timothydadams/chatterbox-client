@@ -1,29 +1,6 @@
 //model for rooms
 
 var Rooms = {
-/*
-  private _data: new Set,
-
-  selected: 'lobby',
-
-  update: function(messages) {
-    _.chain(messages)
-      .pluck('roomname')
-      .uniq()
-      .each(room => {Rooms._data.add(room)});
-  }
-var x = new Set();
-x.add(1);
-x.add({ a: 2 });
-//get iterator:
-var it = x.values();
-//get first entry:
-var first = it.next();
-//get value out of the iterator entry:
-var value = first.value;
-console.log(value); //1
-
-*/
 
   _data: new Set,
 
@@ -33,6 +10,7 @@ console.log(value); //1
     return roomname === Rooms.selected || !roomname && Rooms.selected === 'lobby';
   },
 
+  // Generates the list of room names from available messages
   update: function(messages, cb = () => {}) {
     var length = Rooms._data.size;
 
@@ -52,17 +30,15 @@ console.log(value); //1
 
   },
 
+  //adds new rooms to the _data Set, used by update method and RoomsView.handleClick
   add: function (room, cb = () => {}) {
     Rooms._data.add(room);
     Rooms.selected = room;
     cb(Rooms.items());
   },
 
+  // Generates array for chaining HOF (underscore)
   items: function() {
     return _.chain([...Rooms._data]);
   }
 };
-
-//future new rooms
-//var newRoom = window.prompt('Enter a new room', 'type a room name');
-//RoomsView.renderRoom(newRoom);

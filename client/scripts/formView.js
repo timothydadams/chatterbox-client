@@ -15,13 +15,13 @@ var FormView = {
     event.preventDefault();
     //build the message and POST to server via Parse
     var message = {
-      username: App.username, //from the browser window?
-      text: FormView.$form.find('#message').val(), //Rooms.selected
+      username: App.username, // from the browser window
+      text: FormView.$form.find('#message').val(),
       roomname: RoomsView.$select.val()
     };
-    //POST message to server and store return info on the message object for missing properties
+    //submit message to server and store return info on the message object for missing properties
     Parse.create(message, (data) => {
-      _.extend(message, data);
+      _.extend(message, data); //fills in the missing properties on submit
       Messages.add(message, MessagesView.renderMessage);
     });
   },

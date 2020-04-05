@@ -1,7 +1,6 @@
 
 /*
   Called by app.js
-
 */
 var RoomsView = {
 
@@ -16,6 +15,7 @@ var RoomsView = {
 
   },
 
+  // Builds the list of room names in the select dropdown
   render: function() {
     RoomsView.$select.html('');
     Rooms.items()
@@ -23,11 +23,13 @@ var RoomsView = {
     RoomsView.$select.val(Rooms.selected);
   },
 
+  //generates each drop-down item option
   renderRoom: function(roomname) {
     var $option = $('<option>').val(roomname).text(roomname);
     RoomsView.$select.append($option);
   },
 
+  // Handles creation of new rooms
   handleClick: function(event) {
     var roomname = prompt('Enter a room:');
     if (roomname) {
@@ -38,6 +40,7 @@ var RoomsView = {
     }
   },
 
+  // Updates message list based on room selection
   handleChange: function(event) {
     Rooms.selected = RoomsView.$select.val();
     MessagesView.render();

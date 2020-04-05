@@ -3,9 +3,6 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function(msgs) {
-    // Build container for messages <div id="chats">???
-    // get the messages
-    // MessagesView.$chats.append(MessagesView.render(App.fetch.results));
     MessagesView.$chats.on('click', '.username', MessagesView.handleClick);
   },
 
@@ -18,10 +15,12 @@ var MessagesView = {
       .each(message => MessagesView.renderMessage(message));
   },
 
+  //renders individual messages
   renderMessage: function(message) { // append new message to the view
     MessagesView.$chats.prepend(MessageView.render(message));
   },
 
+  // Processes the username click to add user to friends list
   handleClick: function(event) {
     var username = $(event.currentTarget).data('username');
 
@@ -31,18 +30,3 @@ var MessagesView = {
   }
 
 };
-
-// ------------------
-//   render: function () {
-
-//       MessagesView.$chats.html('');
-//       Messages
-//         .items()
-//         .filter(message => Rooms.isSelected(message.roomname))
-//         .each(message => MessagesView.renderMessage(message));
-//     },
-
-//     renderMessage: function (message) {
-//       var $message = MessageView.render(message);
-//       MessagesView.$chats.prepend($message);
-//     },
