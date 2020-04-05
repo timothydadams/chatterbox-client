@@ -29,6 +29,10 @@ console.log(value); //1
 
   selected: 'lobby',
 
+  isSelected: function(roomname) {
+    return roomname === Rooms.selected || !roomname && Rooms.selected === 'lobby';
+  },
+
   update: function(messages, cb = () => {}) {
     var length = Rooms._data.size;
 
@@ -53,10 +57,6 @@ console.log(value); //1
     Rooms.selected = room;
     cb(Rooms.items());
   },
-
-  render: _.template(`
-    <option><%- obj %></option>
-`),
 
   items: function() {
     return _.chain([...Rooms._data]);

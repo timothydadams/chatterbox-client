@@ -10,41 +10,37 @@ var RoomsView = {
 
   initialize: function() {
     // Event handler for rooms button click
-    RoomsView.$button.on('click', Rooms.add);
+    RoomsView.$button.on('click', RoomsView.handleClick);
     // Event handler for rooms dropdown select (change)
-    RoomsView.$select.on('change', RoomsView.renderRoomMessages(event));
-    RoomsView.buildSelect(); // Builds select list from messages on init
+    RoomsView.$select.on('change', RoomsView.handleChange);
+
   },
 
-  renderRoomMessages: function(event) {
-    //filter all messages based of the target value of the passed in event when dropdown changes
-    //$(event.eventTarget).val()
+  render: function() {
+    RoomsView.$select.html('');
+    Rooms.items()
+      .each(RoomsView.renderRoom);
+    RoomsView.$select.val(Rooms.selected);
   },
 
-  renderRoom: function(newRoom) {
-    if (newRoom) {
-      var room = Rooms.render(newRoom);
-      RoomsView.$select.prepend(room);
+  renderRoom: function(roomname) {
+    var $option = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.append($option);
+  },
+
+  handleClick: function(event) {
+    var roomname = prompt('Enter a room:');
+    if (roomname) {
+      Rooms.add(roomname, ()=>{
+        RoomsView.render();
+        MessagesView.render();
+      });
     }
   },
 
-  buildSelect: function(messages) {
-    //var menuOptions = [];
-    // Pluck the rooms from all messages
-    var menuOptions = _.pluck(messages, 'roomname');
-    // store unique rooms in new array
-    menuOptions = _.uniq(menuOptions);
-    menuOptions.sort();
-    // Iterate over unique rooms to populate dropdown
-    //console.log(menuOptions);
-
-    menuOptions.forEach(item => {
-      if (item) {
-        RoomsView.$select.append(`<option>${item}</option>`);
-      }
-    });
+  handleChange: function(event) {
+    Rooms.selected = RoomsView.$select.val();
+    MessagesView.render();
   }
-
-
 
 };

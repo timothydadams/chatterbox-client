@@ -13,10 +13,8 @@ var MessagesView = {
     //gets items from Messages object and chains
     Messages
       .items()
-      // .filter(Room.isSelected(message))
-      .each(message => {
-        MessagesView.renderMessage(message);
-      });
+      .filter(message => Rooms.isSelected(message.roomname))
+      .each(message => MessagesView.renderMessage(message));
   },
 
   renderMessage: function(message) { // append new message to the view
